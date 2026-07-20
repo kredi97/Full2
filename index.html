@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ресепшен — проект по разметке на плитке</title>
+  <title>Ресепшен 4,20 м — 3 рабочих места</title>
   <style>
     :root {
       --bg: #0f1117;
@@ -12,40 +12,29 @@
       --text: #e8eaef;
       --muted: #8b92a5;
       --accent: #ff6600;
-      --accent-dim: #cc5200;
-      --tile: #9a9a9a;
-      --tile-line: #7a7a7a;
-      --tape: rgba(255, 255, 255, 0.85);
-      --desk: #f4f4f4;
-      --desk-dark: #2d2d2d;
+      --tile: #b5b0a8;
+      --tile-line: #959088;
+      --desk: #f2f2f2;
+      --desk-dark: #3a3f4b;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
-      min-height: 100vh;
     }
 
     header {
-      padding: 2rem 2rem 1rem;
+      padding: 2rem;
       border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, #161922 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, #161922, var(--bg));
     }
 
-    header h1 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    header p {
-      color: var(--muted);
-      max-width: 720px;
-    }
+    header h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+    header p { color: var(--muted); max-width: 760px; }
 
     .badge {
       display: inline-block;
@@ -87,7 +76,6 @@
 
     section h2 {
       font-size: 1rem;
-      font-weight: 600;
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -105,18 +93,13 @@
 
     .panel-body { padding: 1.25rem; }
 
-    /* Floor plan */
     .floor-plan-wrap {
       background: #111;
       border-radius: 8px;
-      padding: 1rem;
+      padding: 0.75rem;
     }
 
-    .floor-plan-wrap svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
+    .floor-plan-wrap svg { width: 100%; height: auto; display: block; }
 
     .legend {
       display: flex;
@@ -127,11 +110,7 @@
       color: var(--muted);
     }
 
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
 
     .legend-swatch {
       width: 14px;
@@ -140,47 +119,68 @@
       border: 1px solid var(--border);
     }
 
-    /* 3D view */
     .scene-3d {
-      perspective: 1200px;
-      height: 380px;
+      perspective: 1100px;
+      height: 340px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(ellipse at 50% 80%, #1e2230 0%, #111 70%);
+      background: radial-gradient(ellipse at 50% 75%, #1e2230, #111);
       border-radius: 8px;
-      overflow: hidden;
       position: relative;
     }
 
     .scene-3d::after {
-      content: 'Вид со стороны покупателя';
+      content: 'Вид сверху-сбоку';
       position: absolute;
       bottom: 0.75rem;
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.75rem;
       color: var(--muted);
-      letter-spacing: 0.04em;
     }
 
     .world {
       transform-style: preserve-3d;
-      transform: rotateX(52deg) rotateZ(-38deg);
+      transform: rotateX(58deg) rotateZ(-42deg);
       position: relative;
-      width: 480px;
-      height: 200px;
+      width: 520px;
+      height: 90px;
     }
 
     .floor-grid {
       position: absolute;
-      inset: -40px -60px -20px -60px;
+      inset: -50px -40px -30px -40px;
       background:
         repeating-linear-gradient(0deg, transparent, transparent 59px, var(--tile-line) 59px, var(--tile-line) 60px),
         repeating-linear-gradient(90deg, transparent, transparent 59px, var(--tile-line) 59px, var(--tile-line) 60px);
       background-color: var(--tile);
       transform: translateZ(-1px);
     }
+
+    .wall-3d {
+      position: absolute;
+      top: -70px;
+      left: -10px;
+      right: -10px;
+      height: 60px;
+      background: linear-gradient(180deg, #e8e8e8, #ccc);
+      transform: translateZ(8px);
+      border-bottom: 2px solid #aaa;
+    }
+
+    .window-3d {
+      position: absolute;
+      top: -65px;
+      width: 80px;
+      height: 50px;
+      background: linear-gradient(135deg, #87ceeb, #b0e0f6);
+      border: 2px solid #999;
+      transform: translateZ(12px);
+    }
+
+    .window-3d.left { left: 120px; }
+    .window-3d.right { right: 120px; }
 
     .desk-3d {
       position: absolute;
@@ -196,92 +196,82 @@
 
     .desk-top {
       inset: 0;
-      transform: translateZ(42px);
-      background: linear-gradient(135deg, #fafafa 0%, #ececec 100%);
-      box-shadow: inset 0 0 0 2px var(--accent);
+      transform: translateZ(32px);
+      background: linear-gradient(135deg, #fafafa, #e8e8e8);
+      box-shadow: inset 0 -3px 0 var(--accent);
     }
 
     .desk-front {
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 42px;
+      bottom: 0; left: 0; right: 0; height: 32px;
       transform-origin: bottom;
       transform: rotateX(-90deg);
-      background: linear-gradient(180deg, #e8e8e8, #d0d0d0);
+      background: linear-gradient(180deg, #e0e0e0, #c8c8c8);
     }
 
     .desk-back {
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 42px;
+      top: 0; left: 0; right: 0; height: 32px;
       transform-origin: top;
       transform: rotateX(90deg);
       background: var(--desk-dark);
     }
 
     .desk-left {
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 42px;
+      left: 0; top: 0; bottom: 0; width: 32px;
       transform-origin: left;
       transform: rotateY(90deg);
-      background: linear-gradient(90deg, #d8d8d8, #c0c0c0);
+      background: #d0d0d0;
     }
 
     .desk-right {
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 42px;
+      right: 0; top: 0; bottom: 0; width: 32px;
       transform-origin: right;
       transform: rotateY(-90deg);
-      background: linear-gradient(270deg, #d8d8d8, #c0c0c0);
+      background: #d0d0d0;
     }
 
-    .accent-strip {
+    .chair-3d {
       position: absolute;
+      width: 36px;
+      height: 36px;
+      background: #555;
+      border-radius: 6px 6px 2px 2px;
+      transform: translateZ(18px);
+      top: -50px;
+    }
+
+    .chair-3d::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 4px;
+      right: 4px;
+      height: 8px;
+      background: #444;
+      border-radius: 2px;
+    }
+
+    .chair-3d.c1 { left: 70px; }
+    .chair-3d.c2 { left: 242px; }
+    .chair-3d.c3 { left: 414px; }
+
+    .divider-3d {
+      position: absolute;
+      top: 0;
       bottom: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: var(--accent);
-      transform: translateZ(43px);
+      width: 2px;
+      background: rgba(0,0,0,0.15);
+      transform: translateZ(33px);
     }
 
-    .wall-3d {
-      position: absolute;
-      top: -80px;
-      left: -20px;
-      right: -20px;
-      height: 70px;
-      background: linear-gradient(180deg, #3a3f4b, #2a2e38);
-      transform: translateZ(20px);
-      border-bottom: 3px solid var(--accent-dim);
-    }
+    .divider-3d.d1 { left: 173px; }
+    .divider-3d.d2 { left: 346px; }
 
-    .wall-label {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 0.65rem;
-      color: #aaa;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* Render image */
     .render-img {
       width: 100%;
       border-radius: 8px;
       display: block;
     }
 
-    /* Specs table */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -294,12 +284,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    th {
-      color: var(--muted);
-      font-weight: 500;
-      width: 45%;
-    }
-
+    th { color: var(--muted); font-weight: 500; width: 48%; }
     td strong { color: var(--accent); }
 
     .specs-note {
@@ -312,13 +297,35 @@
       color: var(--muted);
     }
 
-    .elevation {
+    .workstation-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
       margin-top: 1rem;
     }
 
-    .elevation svg {
-      width: 100%;
-      height: auto;
+    @media (max-width: 700px) {
+      .workstation-cards { grid-template-columns: 1fr; }
+    }
+
+    .ws-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .ws-card .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .ws-card .dim {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
     }
 
     footer {
@@ -332,129 +339,126 @@
 </head>
 <body>
   <header>
-    <div class="badge">Husqvarna Retail</div>
-    <h1>Ресепшен по разметке на плитке</h1>
-    <p>Проект стойки администратора с точным соблюдением контура, отмеченного малярной лентой на полу магазина. Сотрудник работает между стойкой и витриной инструмента, лицом к покупателям.</p>
+    <div class="badge">Магазин инструмента</div>
+    <h1>Ресепшен 4,20 × 0,70 м — 3 рабочих места</h1>
+    <p>Прямоугольная стойка по разметке малярной лентой на полу: длина 4200 мм, глубина столешницы 700 мм. Три сотрудника сидят за стойкой лицом к стене с витринами (BULL, SOLARIS, PATRIOT), покупатели подходят с торгового зала.</p>
   </header>
 
   <main>
     <div class="grid-2">
       <section>
-        <h2>План сверху (по плитке 60×60 см)</h2>
+        <h2>План сверху (плитка 60×60 см)</h2>
         <div class="panel-body">
           <div class="floor-plan-wrap">
-            <svg viewBox="-40 -100 560 400" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="-30 -120 520 320" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <pattern id="tiles" width="60" height="60" patternUnits="userSpaceOnUse">
-                  <rect width="60" height="60" fill="#8e8e8e"/>
-                  <rect width="60" height="60" fill="none" stroke="#6e6e6e" stroke-width="1"/>
+                  <rect width="60" height="60" fill="#b5b0a8"/>
+                  <rect width="60" height="60" fill="none" stroke="#959088" stroke-width="1"/>
                 </pattern>
                 <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
                   <path d="M0,0 L6,3 L0,6 Z" fill="#ff6600"/>
                 </marker>
               </defs>
 
-              <!-- Floor tiles -->
-              <rect x="-20" y="-80" width="520" height="360" fill="url(#tiles)"/>
+              <!-- Floor -->
+              <rect x="-10" y="-90" width="480" height="280" fill="url(#tiles)"/>
 
-              <!-- Tool display wall -->
-              <rect x="-20" y="-80" width="520" height="12" fill="#3a3f4b"/>
-              <text x="240" y="-62" text-anchor="middle" fill="#aaa" font-size="11" font-family="sans-serif">ВИТРИНА ИНСТРУМЕНТА (стена)</text>
+              <!-- Back wall -->
+              <rect x="-10" y="-90" width="480" height="10" fill="#ddd"/>
+              <text x="230" y="-72" text-anchor="middle" fill="#666" font-size="10" font-family="sans-serif">СТЕНА С ВИТРИНАМИ</text>
 
-              <!-- Staff zone -->
-              <rect x="30" y="-56" width="420" height="56" fill="rgba(255,102,0,0.06)" stroke="rgba(255,102,0,0.2)" stroke-dasharray="4 3"/>
-              <text x="240" y="-28" text-anchor="middle" fill="#ff6600" font-size="10" font-family="sans-serif" opacity="0.7">ЗОНА СОТРУДНИКА (2 плитки от стены)</text>
+              <!-- Windows -->
+              <rect x="80" y="-88" width="70" height="50" fill="#a8d8f0" stroke="#888" stroke-width="1.5" rx="2"/>
+              <rect x="310" y="-88" width="70" height="50" fill="#a8d8f0" stroke="#888" stroke-width="1.5" rx="2"/>
+              <text x="115" y="-58" text-anchor="middle" fill="#5a8aaa" font-size="8" font-family="sans-serif">ОКНО</text>
+              <text x="345" y="-58" text-anchor="middle" fill="#5a8aaa" font-size="8" font-family="sans-serif">ОКНО</text>
 
-              <!-- Tape outline (original marking) -->
-              <polygon
-                points="60,0 390,0 450,90 450,150 390,150 90,150 30,150 30,90"
-                fill="none"
-                stroke="white"
-                stroke-width="3"
-                stroke-dasharray="8 4"
-                opacity="0.9"
-              />
-              <text x="240" y="-8" text-anchor="middle" fill="white" font-size="9" font-family="sans-serif" opacity="0.6">← разметка лентой →</text>
+              <!-- Pegboard displays -->
+              <rect x="30" y="-35" width="100" height="30" fill="#8a9098" rx="1"/>
+              <text x="80" y="-16" text-anchor="middle" fill="#fff" font-size="8" font-family="sans-serif">BULL</text>
+              <rect x="160" y="-35" width="100" height="30" fill="#8a9098" rx="1"/>
+              <text x="210" y="-16" text-anchor="middle" fill="#fff" font-size="8" font-family="sans-serif">SOLARIS</text>
+              <rect x="290" y="-35" width="100" height="30" fill="#8a9098" rx="1"/>
+              <text x="340" y="-16" text-anchor="middle" fill="#fff" font-size="8" font-family="sans-serif">PATRIOT</text>
 
-              <!-- Desk fill -->
-              <polygon
-                points="60,0 390,0 450,90 450,150 390,150 90,150 30,150 30,90"
-                fill="rgba(244,244,244,0.92)"
-                stroke="#2d2d2d"
-                stroke-width="2"
-              />
+              <!-- Staff zone behind desk -->
+              <rect x="30" y="0" width="420" height="80" fill="rgba(255,102,0,0.05)" stroke="rgba(255,102,0,0.15)" stroke-dasharray="4 3"/>
+              <text x="240" y="45" text-anchor="middle" fill="#ff6600" font-size="9" font-family="sans-serif" opacity="0.6">ЗОНА СОТРУДНИКОВ (стулья)</text>
 
-              <!-- Orange accent on customer side -->
-              <polyline
-                points="30,150 90,150 390,150 450,150"
-                fill="none"
-                stroke="#ff6600"
-                stroke-width="4"
-              />
+              <!-- Tape marking -->
+              <rect x="30" y="80" width="420" height="70"
+                    fill="none" stroke="white" stroke-width="3"
+                    stroke-dasharray="8 4" opacity="0.95"/>
+              <text x="240" y="74" text-anchor="middle" fill="white" font-size="8" font-family="sans-serif" opacity="0.7">разметка лентой</text>
 
-              <!-- Dimension: total width -->
-              <line x1="30" y1="175" x2="450" y2="175" stroke="#ff6600" stroke-width="1" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
-              <text x="240" y="192" text-anchor="middle" fill="#ff6600" font-size="11" font-family="sans-serif">4200 мм (7 плиток)</text>
+              <!-- Desk body -->
+              <rect x="30" y="80" width="420" height="70"
+                    fill="rgba(242,242,242,0.95)" stroke="#2d2d2d" stroke-width="2"/>
+
+              <!-- Workstation dividers -->
+              <line x1="170" y1="80" x2="170" y2="150" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <line x1="310" y1="80" x2="310" y2="150" stroke="#ccc" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+              <!-- Orange customer-side accent -->
+              <line x1="30" y1="150" x2="450" y2="150" stroke="#ff6600" stroke-width="4"/>
+
+              <!-- Chairs (top view) -->
+              <rect x="75" y="20" width="50" height="40" rx="6" fill="#555" stroke="#333" stroke-width="1"/>
+              <rect x="205" y="20" width="50" height="40" rx="6" fill="#555" stroke="#333" stroke-width="1"/>
+              <rect x="335" y="20" width="50" height="40" rx="6" fill="#555" stroke="#333" stroke-width="1"/>
+              <text x="100" y="44" text-anchor="middle" fill="#ccc" font-size="8" font-family="sans-serif">1</text>
+              <text x="230" y="44" text-anchor="middle" fill="#ccc" font-size="8" font-family="sans-serif">2</text>
+              <text x="360" y="44" text-anchor="middle" fill="#ccc" font-size="8" font-family="sans-serif">3</text>
+
+              <!-- Workstation labels on desk -->
+              <text x="100" y="120" text-anchor="middle" fill="#666" font-size="9" font-family="sans-serif">Место 1</text>
+              <text x="240" y="120" text-anchor="middle" fill="#666" font-size="9" font-family="sans-serif">Место 2</text>
+              <text x="380" y="120" text-anchor="middle" fill="#666" font-size="9" font-family="sans-serif">Место 3</text>
+
+              <!-- Dimension: length -->
+              <line x1="30" y1="168" x2="450" y2="168" stroke="#ff6600" stroke-width="1" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+              <text x="240" y="185" text-anchor="middle" fill="#ff6600" font-size="11" font-family="sans-serif">4200 мм (7 плиток)</text>
 
               <!-- Dimension: depth -->
-              <line x1="470" y1="0" x2="470" y2="150" stroke="#ff6600" stroke-width="1" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
-              <text x="488" y="80" text-anchor="middle" fill="#ff6600" font-size="11" font-family="sans-serif" transform="rotate(90 488 80)">1500 мм</text>
-
-              <!-- Dimension: back edge -->
-              <line x1="60" y1="-18" x2="390" y2="-18" stroke="#8b92a5" stroke-width="1"/>
-              <text x="225" y="-22" text-anchor="middle" fill="#8b92a5" font-size="10" font-family="sans-serif">3300 мм (5,5 плиток)</text>
+              <line x1="468" y1="80" x2="468" y2="150" stroke="#ff6600" stroke-width="1" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+              <text x="486" y="118" text-anchor="middle" fill="#ff6600" font-size="10" font-family="sans-serif" transform="rotate(90 486 118)">700 мм</text>
 
               <!-- Customer direction -->
-              <text x="240" y="230" text-anchor="middle" fill="#e8eaef" font-size="12" font-family="sans-serif">↓ НАПРАВЛЕНИЕ ПОКУПАТЕЛЕЙ ↓</text>
-              <path d="M240,210 L240,250" stroke="#e8eaef" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-              <!-- Corner labels -->
-              <circle cx="60" cy="0" r="4" fill="#ff6600"/>
-              <circle cx="390" cy="0" r="4" fill="#ff6600"/>
-              <circle cx="450" cy="90" r="4" fill="#ff6600"/>
-              <circle cx="450" cy="150" r="4" fill="#ff6600"/>
-              <circle cx="30" cy="150" r="4" fill="#ff6600"/>
-              <circle cx="30" cy="90" r="4" fill="#ff6600"/>
+              <text x="240" y="210" text-anchor="middle" fill="#e8eaef" font-size="11" font-family="sans-serif">↓ ПОКУПАТЕЛИ ↓</text>
+              <path d="M240,195 L240,225" stroke="#e8eaef" stroke-width="1.5" marker-end="url(#arrow)"/>
             </svg>
           </div>
 
           <div class="legend">
-            <div class="legend-item">
-              <div class="legend-swatch" style="background:#8e8e8e"></div>
-              Плитка пола 60×60 см
-            </div>
-            <div class="legend-item">
-              <div class="legend-swatch" style="background:white; border-style:dashed"></div>
-              Разметка малярной лентой
-            </div>
-            <div class="legend-item">
-              <div class="legend-swatch" style="background:#f4f4f4"></div>
-              Стойка ресепшена
-            </div>
-            <div class="legend-item">
-              <div class="legend-swatch" style="background:#ff6600"></div>
-              Акцентная полоса Husqvarna
-            </div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#b5b0a8"></div> Плитка 60×60 см</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:white;border-style:dashed"></div> Разметка лентой</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#f2f2f2"></div> Столешница 700 мм</div>
+            <div class="legend-item"><div class="legend-swatch" style="background:#555"></div> Стулья (3 шт.)</div>
           </div>
         </div>
       </section>
 
       <section>
-        <h2>3D-схема (вид сверху-сбоку)</h2>
+        <h2>3D-схема</h2>
         <div class="panel-body">
           <div class="scene-3d">
             <div class="world">
               <div class="floor-grid"></div>
-              <div class="wall-3d">
-                <span class="wall-label">Витрина Husqvarna</span>
-              </div>
+              <div class="wall-3d"></div>
+              <div class="window-3d left"></div>
+              <div class="window-3d right"></div>
+              <div class="chair-3d c1"></div>
+              <div class="chair-3d c2"></div>
+              <div class="chair-3d c3"></div>
               <div class="desk-3d">
                 <div class="desk-face desk-top"></div>
                 <div class="desk-face desk-front"></div>
                 <div class="desk-face desk-back"></div>
                 <div class="desk-face desk-left"></div>
                 <div class="desk-face desk-right"></div>
-                <div class="accent-strip"></div>
+                <div class="divider-3d d1"></div>
+                <div class="divider-3d d2"></div>
               </div>
             </div>
           </div>
@@ -465,7 +469,7 @@
     <section>
       <h2>Фотореалистичная визуализация</h2>
       <div class="panel-body">
-        <img class="render-img" src="assets/reception-desk-render.png" alt="Визуализация ресепшена в торговом зале Husqvarna">
+        <img class="render-img" src="assets/reception-desk-4200-seated.png" alt="Ресепшен 4,2 м с тремя рабочими местами в торговом зале">
       </div>
     </section>
 
@@ -474,20 +478,38 @@
         <h2>Размеры и конструкция</h2>
         <div class="panel-body">
           <table>
-            <tr><th>Общая ширина (по фронту)</th><td><strong>4200 мм</strong> — 7 плиток</td></tr>
-            <tr><th>Глубина (макс.)</th><td><strong>1500 мм</strong> — 2,5 плитки</td></tr>
-            <tr><th>Задняя прямая секция</th><td><strong>3300 мм</strong> — 5,5 плиток</td></tr>
-            <tr><th>Высота стойки</th><td><strong>1100 мм</strong> (стандарт ресепшена)</td></tr>
-            <tr><th>Толщина столешницы</th><td><strong>40 мм</strong> — ЛДСП/компакт-плита</td></tr>
-            <tr><th>Отступ от стены</th><td><strong>1200 мм</strong> — 2 плитки (зона сотрудника)</td></tr>
-            <tr><th>Форма</th><td>Прямая задняя + фасетные «крылья» по бокам</td></tr>
-            <tr><th>Отделка фасада</th><td>Белый матовый + тёмно-серый цоколь</td></tr>
-            <tr><th>Акцент</th><td>Оранжевая полоса Husqvarna по линии покупателя</td></tr>
-            <tr><th>Подсветка</th><td>LED-лента под свесом столешницы</td></tr>
-            <tr><th>Ниши</th><td>Отдел для брошюр, кабель-менеджмент, тумба под кассу</td></tr>
+            <tr><th>Длина стойки</th><td><strong>4200 мм</strong> (4,20 м)</td></tr>
+            <tr><th>Глубина столешницы</th><td><strong>700 мм</strong> (0,70 м)</td></tr>
+            <tr><th>Рабочих мест</th><td><strong>3</strong> (сидячих)</td></tr>
+            <tr><th>Ширина на 1 место</th><td><strong>1400 мм</strong> (4200 ÷ 3)</td></tr>
+            <tr><th>Высота столешницы</th><td><strong>750 мм</strong> (под сидячую работу)</td></tr>
+            <tr><th>Толщина столешницы</th><td><strong>38 мм</strong> — ЛДСП/компакт-плита</td></tr>
+            <tr><th>Форма</th><td>Прямоугольник по разметке на полу</td></tr>
+            <tr><th>Фасад (сторона покупателя)</th><td>Белый/серый + оранжевая полоса</td></tr>
+            <tr><th>Тыльная сторона</th><td>Открытая зона для сотрудников</td></tr>
+            <tr><th>Оборудование</th><td>Монитор, телефон, касса — на каждом месте</td></tr>
+            <tr><th>Кабель-менеджмент</th><td>Лотки под столешницей, розетки в стене</td></tr>
           </table>
           <div class="specs-note">
-            Контур стойки точно повторяет разметку на полу: прямая задняя грань параллельна стене с инструментом, боковые секции с тупым углом выходят к покупателю и замыкаются короткими фронтальными гранями.
+            Стойка устанавливается точно в контур ленты: длинная сторона параллельна стене с витринами, между двумя окнами. За стойкой — три офисных стула, перед стойкой — зона для покупателей.
+          </div>
+
+          <div class="workstation-cards">
+            <div class="ws-card">
+              <div class="num">1</div>
+              <div>Консультант / касса</div>
+              <div class="dim">1400 × 700 мм</div>
+            </div>
+            <div class="ws-card">
+              <div class="num">2</div>
+              <div>Консультант</div>
+              <div class="dim">1400 × 700 мм</div>
+            </div>
+            <div class="ws-card">
+              <div class="num">3</div>
+              <div>Консультант / сервис</div>
+              <div class="dim">1400 × 700 мм</div>
+            </div>
           </div>
         </div>
       </section>
@@ -495,48 +517,47 @@
       <section>
         <h2>Фасад (вид со стороны покупателя)</h2>
         <div class="panel-body">
-          <div class="elevation">
-            <svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
-              <!-- Floor -->
-              <rect x="0" y="170" width="500" height="30" fill="#8e8e8e"/>
-              <line x1="0" y1="170" x2="500" y2="170" stroke="#6e6e6e"/>
+          <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <rect x="0" y="155" width="520" height="25" fill="#b5b0a8"/>
+            <line x1="0" y1="155" x2="520" y2="155" stroke="#959088"/>
 
-              <!-- Desk body -->
-              <path d="M30,170 L30,70 L90,70 L90,50 L390,50 L390,70 L450,70 L450,90 L450,170 Z"
-                    fill="#f0f0f0" stroke="#2d2d2d" stroke-width="2"/>
+            <!-- Desk body -->
+            <rect x="20" y="95" width="480" height="60" fill="#ececec" stroke="#2d2d2d" stroke-width="1.5"/>
 
-              <!-- Countertop -->
-              <path d="M25,50 L95,50 L95,30 L385,30 L385,50 L455,50 L460,55 L25,55 Z"
-                    fill="#fafafa" stroke="#bbb" stroke-width="1.5"/>
+            <!-- Countertop -->
+            <rect x="15" y="82" width="490" height="16" fill="#fafafa" stroke="#bbb" stroke-width="1" rx="1"/>
 
-              <!-- Orange stripe -->
-              <path d="M30,170 L30,162 L90,162 L90,145 L390,145 L390,162 L450,162 L450,170 Z"
-                    fill="#ff6600"/>
+            <!-- Orange stripe -->
+            <rect x="20" y="145" width="480" height="8" fill="#ff6600"/>
 
-              <!-- Dark kickboard -->
-              <path d="M30,170 L30,155 L90,155 L90,140 L390,140 L390,155 L450,155 L450,170 Z"
-                    fill="#2d2d2d" opacity="0.85"/>
+            <!-- Dark kickboard -->
+            <rect x="20" y="130" width="480" height="15" fill="#3a3f4b"/>
 
-              <!-- LED glow -->
-              <path d="M30,55 L90,55 L90,38 L390,38 L390,55 L450,55"
-                    fill="none" stroke="#ff6600" stroke-width="2" opacity="0.4"/>
+            <!-- Workstation dividers (subtle) -->
+            <line x1="180" y1="82" x2="180" y2="155" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
+            <line x1="340" y1="82" x2="340" y2="155" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
 
-              <!-- Height dim -->
-              <line x1="470" y1="30" x2="470" y2="170" stroke="#ff6600" stroke-width="1"/>
-              <text x="478" y="105" fill="#ff6600" font-size="11" font-family="sans-serif">1100</text>
+            <!-- Labels -->
+            <text x="100" y="120" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Место 1</text>
+            <text x="260" y="120" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Место 2</text>
+            <text x="420" y="120" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">Место 3</text>
 
-              <!-- Labels -->
-              <text x="240" y="22" text-anchor="middle" fill="#8b92a5" font-size="10" font-family="sans-serif">СТОЛЕШНИЦА</text>
-              <text x="240" y="130" text-anchor="middle" fill="#8b92a5" font-size="10" font-family="sans-serif">ФАСАД</text>
-            </svg>
-          </div>
+            <!-- Dimensions -->
+            <line x1="20" y1="72" x2="500" y2="72" stroke="#ff6600" stroke-width="1"/>
+            <text x="260" y="68" text-anchor="middle" fill="#ff6600" font-size="10" font-family="sans-serif">4200</text>
+
+            <line x1="510" y1="82" x2="510" y2="155" stroke="#ff6600" stroke-width="1"/>
+            <text x="516" y="122" text-anchor="middle" fill="#ff6600" font-size="9" font-family="sans-serif" transform="rotate(90 516 122)">750</text>
+
+            <text x="260" y="78" text-anchor="middle" fill="#8b92a5" font-size="9" font-family="sans-serif">СТОЛЕШНИЦА 700 мм (глубина)</text>
+          </svg>
         </div>
       </section>
     </div>
   </main>
 
   <footer>
-    Проект ресепшена · разметка по плитке 60×60 см · Husqvarna Retail
+    Ресепшен 4200 × 700 мм · 3 сидячих места · по разметке на плитке
   </footer>
 </body>
 </html>
