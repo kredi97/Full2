@@ -317,6 +317,53 @@
       display: block;
     }
 
+    .render-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .render-gallery { grid-template-columns: 1fr; }
+    }
+
+    .render-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .render-card img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .render-card .caption {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .render-card .caption::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .render-hero {
+      margin-bottom: 1rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -569,9 +616,31 @@
     </div>
 
     <section>
-      <h2>Фотореалистичная визуализация</h2>
+      <h2>Рендеры с разных сторон</h2>
       <div class="panel-body">
-        <img class="render-img" src="assets/reception-desk-with-pickup-sides.png" alt="Ресепшен с боковыми зонами выдачи по 600 мм">
+        <div class="render-hero">
+          <img class="render-img" src="assets/reception-desk-with-pickup-sides.png" alt="Общий вид ресепшена с боковой выдачей">
+          <p class="caption" style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted)">Общий вид — 3/4 со стороны торгового зала</p>
+        </div>
+
+        <div class="render-gallery">
+          <figure class="render-card">
+            <img src="assets/render-front.png" alt="Вид спереди — со стороны покупателей">
+            <figcaption class="caption">Спереди — со стороны покупателей</figcaption>
+          </figure>
+          <figure class="render-card">
+            <img src="assets/render-left.png" alt="Вид слева — зона выдачи">
+            <figcaption class="caption">Слева — зона выдачи 600 мм</figcaption>
+          </figure>
+          <figure class="render-card">
+            <img src="assets/render-right.png" alt="Вид справа — зона выдачи">
+            <figcaption class="caption">Справа — зона выдачи 600 мм</figcaption>
+          </figure>
+          <figure class="render-card">
+            <img src="assets/render-top.png" alt="Вид сверху — планировка">
+            <figcaption class="caption">Сверху — план раскладки на полу</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
