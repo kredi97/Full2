@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Острая травма зубов · БГМУ · 5 курс</title>
+  <meta name="description" content="Учебная презентация по острой травме зубов: классификация, диагностика и лечение. БГМУ, стоматологический факультет, 5 курс, лекция №5." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #1e293b;
+      --card: #ffffff;
+      --accent: #0ea5e9;
+      --accent-dark: #0369a1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --ring: rgba(14, 165, 233, 0.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+      color: var(--text);
+      background: #f1f5f9;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
 
+    header.hero {
+      background: radial-gradient(1200px 600px at 80% -10%, #1e40af 0%, transparent 60%),
+                  linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 100%);
+      color: #f8fafc;
+      padding: 72px 24px 88px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero .badge {
+      display: inline-block;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7dd3fc;
+      border: 1px solid rgba(125, 211, 252, 0.4);
+      border-radius: 999px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      margin: 0 0 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .hero p.sub {
+      font-size: clamp(15px, 2vw, 19px);
+      color: #cbd5e1;
+      margin: 0 auto 32px;
+      max-width: 680px;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #04283a;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      padding: 14px 26px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px -10px var(--ring);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .cta:hover { transform: translateY(-2px); background: #38bdf8; box-shadow: 0 16px 36px -12px var(--ring); }
+    .cta svg { width: 20px; height: 20px; }
+
+    main {
+      max-width: 960px;
+      margin: -56px auto 64px;
+      padding: 0 24px;
+      position: relative;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px -24px rgba(15, 23, 42, 0.35);
+      padding: 32px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .meta-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .meta-item .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .meta-item .v { font-size: 17px; font-weight: 700; margin-top: 4px; }
+
+    section.outline { margin-top: 40px; }
+    section.outline h2 {
+      font-size: 22px;
+      margin: 0 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    section.outline h2::before {
+      content: "";
+      width: 6px; height: 24px;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+    ol.slides {
+      list-style: none;
+      counter-reset: slide;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    ol.slides li {
+      counter-increment: slide;
+      background: var(--card);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px 14px 52px;
+      position: relative;
+      font-size: 15px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    ol.slides li:hover { border-color: var(--accent); transform: translateY(-2px); }
+    ol.slides li::before {
+      content: counter(slide);
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 24px 24px 56px;
+    }
+    footer .disclaimer { max-width: 640px; margin: 0 auto 8px; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <span class="badge">Лекция №5 · Стоматология</span>
+    <h1>Острая травма зубов</h1>
+    <p class="sub">
+      Учебная презентация по классификации, диагностике и лечению острой травмы зубов.
+      Белорусский государственный медицинский университет, стоматологический факультет, 5 курс.
+    </p>
+    <a class="cta" href="%D0%9E%D1%81%D1%82%D1%80%D0%B0%D1%8F_%D1%82%D1%80%D0%B0%D0%B2%D0%BC%D0%B0_%D0%B7%D1%83%D0%B1%D0%BE%D0%B2_%D0%91%D0%93%D0%9C%D0%A3_5%D0%BA%D1%83%D1%80%D1%81.pptx" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      Скачать презентацию (.pptx)
+    </a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="meta-grid">
+        <div class="meta-item"><div class="k">Учреждение</div><div class="v">БГМУ</div></div>
+        <div class="meta-item"><div class="k">Факультет</div><div class="v">Стоматологический</div></div>
+        <div class="meta-item"><div class="k">Курс</div><div class="v">5 курс</div></div>
+        <div class="meta-item"><div class="k">Слайдов</div><div class="v">18</div></div>
+      </div>
+
+      <section class="outline">
+        <h2>План лекции</h2>
+        <ol class="slides">
+          <li>Титульный слайд</li>
+          <li>План лекции</li>
+          <li>Определение</li>
+          <li>Эпидемиология и факторы риска</li>
+          <li>Классификация (ВОЗ / Andreasen)</li>
+          <li>Обследование пациента</li>
+          <li>Трещина эмали и перелом коронки</li>
+          <li>Перелом корня</li>
+          <li>Травмы периодонта (люксации)</li>
+          <li>Интрузивный вывих — тактика</li>
+          <li>Полный вывих (авульсия) — «золотой час»</li>
+          <li>Шинирование</li>
+          <li>Особенности травмы временных зубов</li>
+          <li>Осложнения</li>
+          <li>Диспансеризация (ориентир IADT)</li>
+          <li>Профилактика</li>
+          <li>Ключевые выводы</li>
+          <li>Спасибо за внимание</li>
+        </ol>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p class="disclaimer">
+      Материал носит учебный характер и предназначен для студентов-медиков.
+      Клинические решения должны основываться на актуальных протоколах (IADT) и указаниях преподавателя.
+    </p>
+    <p>© БГМУ · Острая травма зубов · Лекция №5</p>
+  </footer>
+</body>
+</html>

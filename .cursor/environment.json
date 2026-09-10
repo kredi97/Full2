@@ -1,0 +1,16 @@
+{
+  "name": "Острая травма зубов — static site",
+  "ports": [
+    {
+      "name": "web",
+      "port": 8000
+    }
+  ],
+  "terminals": [
+    {
+      "name": "web",
+      "command": "python3 -m http.server 8000 --bind 0.0.0.0",
+      "description": "Статический веб-сервер, раздаёт index.html и файл презентации на порту 8000."
+    }
+  ]
+}
